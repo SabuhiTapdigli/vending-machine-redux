@@ -1,6 +1,5 @@
-import {useState,useEffect} from 'react'
 import styled from 'styled-components'
-import Machine from '../assets/vendor-machine.png';
+import machine from '../assets/vendor-machine.png';
 import Itemid from './ItemId';
 import Numpad from './Numpad';
 import DisplayScreen from './DisplayScreen'
@@ -12,11 +11,11 @@ const VendorMachine = () =>{
     const {products} = useSelector(state => state.Products)
     return(
         <Container>
-            <Machine_img src={Machine} alt='Vendor-Machine'/>
+            <Machineimg src={machine} alt='Vendor-Machine'/>
             <DisplayScreen/>
             <Itemidwrapper>
                 {products.map((item,index)=>(
-                    <Itemid key={index} item = {item}/>
+                    <Itemid key = {index} item = {item}/>
                 ))}
             </Itemidwrapper>
             <ImgWrapper>
@@ -37,7 +36,7 @@ const Container = styled.div`
     position:relative;
 `
 
-const Machine_img = styled.img`
+const Machineimg = styled.img`
     width:100%;
     height:100%;
     position:relative;
@@ -57,9 +56,6 @@ const ImgWrapper = styled.div`
     top: 52px;
     left: 27.5px;
     z-index:0;
-    // div:first-child{
-    //     margin-bottom:10px;
-    // }
     div:not(:first-child){
         margin-top: 10px;
     }

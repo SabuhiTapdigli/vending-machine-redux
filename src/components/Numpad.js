@@ -1,20 +1,22 @@
 import styled from 'styled-components'
 import React from 'react'
-import {useDispatch,useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { changeInitiate, ordereditemInitiate, getproductInitiate } from '../store/actions/actions'
-import {useState} from 'react'
+import { useState } from 'react'
 
 const Numpad = () => {
     const {coins,products} = useSelector(state=>state.Products)
     const [id,setid] = useState('')
-    
     const dispatch = useDispatch()
+
     const numhandler = (e) => {
         setid(id+e.target.id)
     }
+
     const clearhandler = () => {
         setid('')
     }
+
     const okhandler = () => {
         const arr = products.map((i)=>i.filter((filtered)=>{
             if(filtered.id === id &&  filtered.price <= coins && filtered.item_count!==0 ){
@@ -22,7 +24,7 @@ const Numpad = () => {
                 dispatch(changeInitiate(coins-filtered.price))
                 setid('')
                 dispatch(ordereditemInitiate({cond:true,product:filtered.item_name}))
-                const time = setTimeout(() => {
+                setTimeout(() => {
                     dispatch(ordereditemInitiate(false))
                 }, 3000);
                 
@@ -31,12 +33,10 @@ const Numpad = () => {
         }))
         dispatch(getproductInitiate(arr))
         setid('')
+        
     }
-  
-    
-
     return(
-        <Numpad_wrapper>
+        <Numpadwrapper>
             <Num id='1' onClick={numhandler}>1</Num>
             <Num id='2' onClick={numhandler}>2</Num>
             <Num id='3' onClick={numhandler}>3</Num><br/>
@@ -49,10 +49,10 @@ const Numpad = () => {
             <Num onClick={clearhandler}>C</Num>
             <Num id='0' onClick={numhandler}>0</Num>
             <Num onClick={okhandler}>OK</Num>
-        </Numpad_wrapper>
+        </Numpadwrapper>
     )
 }
-const Numpad_wrapper = styled.div`
+const Numpadwrapper = styled.div`
     position:absolute;
     top:230px;
     right:41px;
@@ -77,6 +77,4 @@ const Num = styled.div`
         background-color:green;
     }
 `
-
-
 export default React.memo(Numpad)

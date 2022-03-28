@@ -1,18 +1,18 @@
 
 import styled from 'styled-components'
 import display_bg from '../assets/display-bg.png'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 const DisplayScreen = () => {
-    const {coins} = useSelector(state=>state.Products)
+    const { coins } = useSelector(state=>state.Products)
     return(
-        <Display_Bg>
-            <img src={display_bg} alt='Display'/>
-            <span>{coins}</span>
-        </Display_Bg>
+        <DisplayBg>
+            <img src={ display_bg } alt='Display'/>
+            <span>{ coins }</span>
+        </DisplayBg>
     )
 }
 
-const Display_Bg = styled.div`
+const DisplayBg = styled.div`
     
     position:absolute;
     top:57px;
@@ -23,7 +23,7 @@ const Display_Bg = styled.div`
     span{
         position:absolute;
         top:13px;
-        right:35px;
+        right:38px;
         font-size:25px;
         color:red
     }

@@ -1,11 +1,8 @@
 import VendorMachine from "./components/VendorMachine";
 import Coins from "./components/Coins";
 import styled from "styled-components";
-import {useSelector} from 'react-redux'
-import {useState} from "react"
 
 function App() {
-
   return (
     <Container>
         <VendorMachine/>

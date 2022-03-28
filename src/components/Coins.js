@@ -5,7 +5,7 @@ import coin_50 from '../assets/coin-50.png'
 import coin_20 from '../assets/coin-20.png'
 import coin_10 from '../assets/coin-10.png'
 import coin_5 from '../assets/coin-5.png'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getcoinsInitiate } from '../store/actions/actions'
 const Coins = () => {
     const dispatch = useDispatch()

@@ -1,13 +1,13 @@
 
 import styled from 'styled-components';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Pushproduct = () => {
     const product_img = '../assets/';
-    const {orderedItem} = useSelector(state=>state.Products)
+    const { orderedItem } = useSelector(state=>state.Products)
     return(
         <Wrapper>
-                {orderedItem.cond && <img src={`${product_img}${orderedItem.product}.png`} alt='product'/> }
+                {orderedItem.cond && <img src={`${product_img}${orderedItem.product}.png`} alt={`${orderedItem.product}`}/> }
         </Wrapper>
     )
 }

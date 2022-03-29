@@ -3,9 +3,7 @@ import React from 'react'
 const Itemid = ({item}) =>{
     return(
         <Wrapper>
-            {item.map((i)=>
-                <span key={i.id}>{i.id}</span>
-            )}
+                <span>{item.id}</span>
         </Wrapper>
     )
 }

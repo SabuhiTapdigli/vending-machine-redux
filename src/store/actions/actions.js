@@ -1,26 +1,26 @@
 import * as types from './actionTypes'
 
-const getproducts = (products) => {
+const getProducts = (products) => {
     return{
         type:types.GET_PRODUCT,
         payload:products
     }
 }
-const sumcoins = (coins) => {
+const sumCoins = (coins) => {
     return{
         type:types.SUM_COINS,
         payload:coins
     }
 }
 
-const change_amount = (change) => {
+const changeAmount = (change) => {
     return{
         type:types.CHANGE_AMOUNT,
         payload:change
     }
 }
 
-const ordered_item = (item) => {
+const orderedItem = (item) => {
     return{
         type:types.ORDERED_ITEM,
         payload: item
@@ -29,24 +29,24 @@ const ordered_item = (item) => {
 
 export const getproductInitiate = (data) =>{
     return function(dispatch){
-        dispatch(getproducts(data))
+        dispatch(getProducts(data))
     }
 }
 
 export const getcoinsInitiate = (coins) =>{
     return function(dispatch){
-        dispatch(sumcoins(coins))
+        dispatch(sumCoins(coins))
     }
 }
 
 export const changeInitiate = (change) =>{
     return function(dispatch){
-        dispatch(change_amount(change))
+        dispatch(changeAmount(change))
     }
 }
 
 export const ordereditemInitiate = (item) => {
     return function(dispatch){
-        dispatch(ordered_item(item))
+        dispatch(orderedItem(item))
     }
 }

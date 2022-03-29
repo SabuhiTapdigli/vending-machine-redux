@@ -1,7 +1,15 @@
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.bomba{
+    left:32% !important;
+    width:19px !important;
+}
 .bomba:nth-child(2){
-    right: 25%;
+    margin-left:3px;
 }
 .bomba:nth-child(3){
-    right: 19%;
+    margin-left:5px;
 }

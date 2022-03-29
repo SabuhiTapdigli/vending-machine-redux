@@ -1,14 +1,8 @@
 import styled from 'styled-components'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { changeInitiate, ordereditemInitiate, getproductInitiate } from '../store/actions/actions'
-import { useState } from 'react'
 
-const Numpad = () => {
-    const {coins,products} = useSelector(state=>state.Products)
-    const [id,setid] = useState('')
-    const dispatch = useDispatch()
 
+const Numpad = ({id,setid,onOk}) => {
     const numhandler = (e) => {
         setid(id+e.target.id)
     }
@@ -18,22 +12,7 @@ const Numpad = () => {
     }
 
     const okhandler = () => {
-        const arr = products.map((i)=>i.filter((filtered)=>{
-            if(filtered.id === id &&  filtered.price <= coins && filtered.item_count!==0 ){
-                filtered['item_count'] = filtered.item_count-1
-                dispatch(changeInitiate(coins-filtered.price))
-                setid('')
-                dispatch(ordereditemInitiate({cond:true,product:filtered.item_name}))
-                setTimeout(() => {
-                    dispatch(ordereditemInitiate(false))
-                }, 3000);
-                
-            }
-            return products
-        }))
-        dispatch(getproductInitiate(arr))
-        setid('')
-        
+        onOk()
     }
     return(
         <Numpadwrapper>
@@ -54,21 +33,21 @@ const Numpad = () => {
 }
 const Numpadwrapper = styled.div`
     position:absolute;
-    top:230px;
+    top:228px;
     right:41px;
 `
 const Num = styled.div`
     color:black;
     background-color:#e6e5e3;
     border-radius:50%;
-    height: 13px;
-    width: 13px;
-    font-size: 12px;
+    height: 22px;
+    width: 22px;
+    font-size: 11px;
     padding: 5px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin:2px;
+    margin: 3px;
     cursor:pointer;
     &:active{
         background-color:red;

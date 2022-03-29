@@ -1,29 +1,48 @@
 import styled from 'styled-components'
 import machine from '../assets/vendor-machine.png';
-import Itemid from './ItemId';
 import Numpad from './Numpad';
 import DisplayScreen from './DisplayScreen'
 import Cancelbtn from './Cancelbtn';
 import Products from './Products';
 import Pushproduct from './Pushproduct';
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+import { changeInitiate, ordereditemInitiate, getproductInitiate } from '../store/actions/actions'
+import { useState} from 'react'
 const VendorMachine = () =>{
-    const {products} = useSelector(state => state.Products)
+    const {coins,products} = useSelector(state => state.Products)
+    const [id,setid] = useState('')
+    const dispatch = useDispatch()
+
+    const onPurchase = () => {
+        const newArr = products.map((i)=>{
+            if(i.id === id &&  i.price <= coins && i.item_count !== 0 ){
+                return{
+                    ...i,
+                    item_count : i.item_count - 1
+                }
+            }
+            return i
+        })
+        const foundProduct = products.find(i=> i.id === id &&  i.price <= coins && i.item_count !== 0)
+        if(foundProduct){
+                dispatch(changeInitiate(coins-foundProduct.price))
+                dispatch(ordereditemInitiate({name:foundProduct.item_name}))
+        }
+        dispatch(getproductInitiate(newArr))
+        setid('')
+    }
+    
+
     return(
         <Container>
             <Machineimg src={machine} alt='Vendor-Machine'/>
             <DisplayScreen/>
-            <Itemidwrapper>
-                {products.map((item,index)=>(
-                    <Itemid key = {index} item = {item}/>
-                ))}
-            </Itemidwrapper>
-            <ImgWrapper>
+            <ProductWrapper>
                 {products.map((item,index)=>(
                     <Products key = {index} item = {item}/>
                 ))}
-            </ImgWrapper>
-            <Numpad/>
+            </ProductWrapper>
+            <Numpad onOk={onPurchase} id={id} setid={setid}/>
             <Cancelbtn/>
             <Pushproduct/>
         </Container>
@@ -35,30 +54,20 @@ const Container = styled.div`
     width:500px;
     position:relative;
 `
-
+const ProductWrapper = styled.div`
+    position:absolute;
+    top: 54px;
+    left: 35px;
+    z-index:0;
+    display: inline-grid;
+    grid-template-columns: 54px repeat(3,55px) 54px;
+    grid-template-rows: 86px repeat(4,86px);
+    gap:7px 7px;
+`
 const Machineimg = styled.img`
     width:100%;
     height:100%;
     position:relative;
-`
-
-const Itemidwrapper = styled.div`
-    position:absolute;
-    top: 111px;
-    left: 38px;
-    div:not(:first-child){
-        margin-top: 31px;
-    }
-    z-index:1;
-`
-const ImgWrapper = styled.div`
-    position:absolute;
-    top: 52px;
-    left: 27.5px;
-    z-index:0;
-    div:not(:first-child){
-        margin-top: 10px;
-    }
 `
 
 
